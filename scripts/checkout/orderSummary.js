@@ -5,8 +5,7 @@ import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'; // default exp
 import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
 import { renderPaymentSummary } from "./paymentSummary.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";
-
-
+import { calculateDeliveryDays } from "../../data/deliveryOptions.js";
 
 
 
@@ -35,9 +34,10 @@ export function renderOrderSummary() {
       // getting full delivery option object to display info on the page 
       const deliveryOption = getDeliveryOption(deliveryOptionId);
       
-      const today = dayjs();
-      const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
-      const dateString = deliveryDate.format('dddd, MMMM D');
+      // const today = dayjs();
+      // const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
+      const dateString = calculateDeliveryDays(deliveryOption);
+
 
 
 
@@ -101,9 +101,10 @@ export function renderOrderSummary() {
 
 
       // getting the right day from today to display
-      const today = dayjs();
-      const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
-      const dateString = deliveryDate.format('dddd, MMMM D');
+      // const today = dayjs();
+      // const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
+      const dateString = calculateDeliveryDays(deliveryOption);
+    
       
 
       // getting the right price
@@ -236,10 +237,11 @@ export function renderOrderSummary() {
           renderCheckoutHeader();
           document.querySelector(`.js-quantity-label-${productId}`).innerHTML = newQuantity;
           // document.querySelector('.js-return-to-home-link').innerHTML = `${calculateCartQuantity()} items`;
-          const containerElement = document.querySelector(`.js-cart-item-container-${productId}`);
+          
           renderPaymentSummary();
 
           // removing class to hide input element
+          const containerElement = document.querySelector(`.js-cart-item-container-${productId}`);
           containerElement.classList.remove('is-editing-quantity');
         }
       }
