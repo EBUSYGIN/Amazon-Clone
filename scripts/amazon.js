@@ -103,7 +103,7 @@ function renderProductsGrid() {
       clearTimeout(timeouts.productId);
       timeoutId = setTimeout(() => {
         removeMessage(productId);
-      }, 2000);
+      }, 1000);
       timeouts.productId = timeoutId;
 
 
