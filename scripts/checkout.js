@@ -5,24 +5,38 @@ import { loadProducts, loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 // import '../data/backend-practice.js';
 
-
-
-
-// allows us to run multiple promises at the same time and it waits for it to finish before going to the next step
-Promise.all([
-  loadProductsFetch(),
-  new Promise((resolve) => {
+async function loadPage() {
+  await loadProductsFetch();
+  
+  const value = await new Promise((resolve) => {
     loadCart(() => {
       resolve('value2');
     });
-  })
+  });
+  console.log(value);
 
-]).then((values) => {
-  console.log(values);
   renderCheckoutHeader();
   renderOrderSummary();
   renderPaymentSummary();
-});
+}
+loadPage()
+
+
+// allows us to run multiple promises at the same time and it waits for it to finish before going to the next step
+// Promise.all([
+//   loadProductsFetch(),
+//   new Promise((resolve) => {
+//     loadCart(() => {
+//       resolve('value2');
+//     });
+//   })
+
+// ]).then((values) => {
+//   console.log(values);
+//   renderCheckoutHeader();
+//   renderOrderSummary();
+//   renderPaymentSummary();
+// });
 
 
 
