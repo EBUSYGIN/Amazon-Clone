@@ -6,21 +6,52 @@ import { loadCart } from "../data/cart.js";
 // import '../data/backend-practice.js';
 
 
+
+
+// allows us to run multiple promises at the same time and it waits for it to finish before going to the next step
+Promise.all([
+  new Promise((resolve) => {
+    loadProducts(() => {
+      resolve('value1');
+    });
+  
+  }),
+  new Promise((resolve) => {
+    loadCart(() => {
+      resolve('value2');
+    });
+  })
+
+]).then((values) => {
+  console.log(values);
+  renderCheckoutHeader();
+  renderOrderSummary();
+  renderPaymentSummary();
+});
+
+
+
+
+
+/*
 new Promise((resolve) => {
   loadProducts(() => {
-    resolve();
+    resolve('value1');
   });
-}).then(() => {
+
+}).then((value) => {
   return new Promise((resolve) => {
     loadCart(() => {
-      resolve();
+      resolve('value2');
     });
   });
+
 }).then(() => {
   renderCheckoutHeader();
   renderOrderSummary();
   renderPaymentSummary();
 });
+*/
 
 
 
