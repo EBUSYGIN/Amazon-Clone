@@ -6,18 +6,24 @@ import { loadCart } from "../data/cart.js";
 // import '../data/backend-practice.js';
 
 async function loadPage() {
-  await loadProductsFetch();
-  
-  const value = await new Promise((resolve) => {
-    loadCart(() => {
-      resolve('value2');
+  try {
+    //throw 404 this allows us to throw errors into try-catch 
+    await loadProductsFetch();
+    
+    const value = await new Promise((resolve, reject) => {
+      loadCart(() => {
+        //reject(); allows us to throw errors in the promises
+        resolve();
+      });
     });
-  });
-  console.log(value);
 
-  renderCheckoutHeader();
-  renderOrderSummary();
-  renderPaymentSummary();
+    renderCheckoutHeader();
+    renderOrderSummary();
+    renderPaymentSummary();
+  } catch(error) {
+    console.log('Error');
+    console.log(error);
+  }
 }
 loadPage()
 

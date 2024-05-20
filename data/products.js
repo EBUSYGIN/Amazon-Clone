@@ -104,6 +104,9 @@ export function loadProductsFetch() {
     });
 
     console.log('loaded products');
+  }).catch((error) => {
+    console.log('Error');
+    console.log(error);
   });
 
   return promise;
@@ -126,6 +129,12 @@ export function loadProducts(fun) {
 
     console.log('loaded products');
     fun();
+  });
+
+
+  xhr.addEventListener('error', (error) => {
+    console.log('Error!');
+    console.log('error');
   });
 
 
