@@ -196,8 +196,9 @@ export function renderOrderSummary() {
       const newQuantity = Number(document.querySelector(`.js-quantity-input-${productId}`).value);
 
       // Checking if user inputs value less than 0
-      if (newQuantity < 0) {
-        alert('Quantity cannot be less than 0');
+      if (newQuantity <= 0) {
+        console.log(newQuantity);
+        alert('Invalid input');
       } else {
         // Updating the quantity of the product in the cart 
         updateQuantity(productId, newQuantity);
