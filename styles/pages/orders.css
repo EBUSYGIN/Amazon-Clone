@@ -161,6 +161,11 @@
   padding: 8px;
 }
 
+
+.order-details-grid {
+  margin-bottom: 50px;
+}
+
 @media (max-width: 800px) {
   .buy-again-button {
     margin-bottom: 10px;
