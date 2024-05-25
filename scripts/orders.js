@@ -16,40 +16,54 @@ async function renderOrdersPage() {
 
   let ordersHTML= '';
 
-
-
-  orders.forEach((order) => {
-    console.log(order);
-
-    const date = dayjs(order.orderTime).format('MMMM D, YYYY');
-
+  if (orders.length <= 0 ) {
     ordersHTML += `
-    <div class="order-container">
-          
-    <div class="order-header">
-      <div class="order-header-left-section">
-        <div class="order-date">
-          <div class="order-header-label">Order Placed:</div>
-          <div>${date}</div>
-        </div>
-        <div class="order-total">
-          <div class="order-header-label">Total:</div>
-          <div>$${formatCurrency(order.totalCostCents)}</div>
-        </div>
-      </div>
-
-      <div class="order-header-right-section">
-        <div class="order-header-label">Order ID:</div>
-        <div>${order.id}</div>
-      </div>
-    </div>
     
-    <div class="order-details-grid">
-      ${productInfo(order)}
-    </div>
-    `
-    return ordersHTML;
-  });
+    <div class="order-header">
+        <div class="order-header-left-section">
+          You haven't places any orders
+        </div>
+
+        <div class="order-header-right-section">
+          <a href="index.html">Go shopping</a>
+        </div>
+      </div>
+    `;
+  } else {
+
+    orders.forEach((order) => {
+      console.log(order);
+
+      const date = dayjs(order.orderTime).format('MMMM D, YYYY');
+
+      ordersHTML += `
+      <div class="order-container">
+            
+      <div class="order-header">
+        <div class="order-header-left-section">
+          <div class="order-date">
+            <div class="order-header-label">Order Placed:</div>
+            <div>${date}</div>
+          </div>
+          <div class="order-total">
+            <div class="order-header-label">Total:</div>
+            <div>$${formatCurrency(order.totalCostCents)}</div>
+          </div>
+        </div>
+
+        <div class="order-header-right-section">
+          <div class="order-header-label">Order ID:</div>
+          <div>${order.id}</div>
+        </div>
+      </div>
+      
+      <div class="order-details-grid">
+        ${productInfo(order)}
+      </div>
+      `
+      return ordersHTML;
+    });
+  }
 
 
 

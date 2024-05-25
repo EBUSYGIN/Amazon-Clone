@@ -13,7 +13,7 @@ export function renderCheckoutHeader() {
   const headerHTML = `
   
   Checkout (<a class="return-to-home-link js-return-to-home-link"
-            href="amazon.html">${cartQuantity} items</a>)
+            href="index.html">${cartQuantity} items</a>)
   
   `;
 
