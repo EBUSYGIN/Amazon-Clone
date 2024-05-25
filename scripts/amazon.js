@@ -100,11 +100,11 @@ function renderProductsGrid() {
       addedMessage(productId);
 
       
-      clearTimeout(timeouts.productId);
+      clearTimeout(timeouts[productId]);
       timeoutId = setTimeout(() => {
         removeMessage(productId);
       }, 1000);
-      timeouts.productId = timeoutId;
+      timeouts[productId] = timeoutId;
 
 
 
