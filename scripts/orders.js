@@ -34,7 +34,7 @@ async function renderOrdersPage() {
     orders.forEach((order) => {
       console.log(order);
 
-      const date = dayjs(order.orderTime).format('MMMM D, YYYY');
+      const date = dayjs(order.orderTime).format('dddd, MMMM D, YYYY');
 
       ordersHTML += `
       <div class="order-container">
