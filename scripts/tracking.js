@@ -14,8 +14,7 @@ async function renderTrackingPage() {
 
   const matchingProduct = getProduct(productId);
   const matchingOrder = getOrder(orderId);
-  console.log(matchingProduct);
-  console.log(matchingOrder);
+  
 
 
   let orderDetails;
@@ -24,7 +23,7 @@ async function renderTrackingPage() {
       orderDetails = product;
     }
   });
-  console.log(orderDetails);
+
 
 
   const today = dayjs();

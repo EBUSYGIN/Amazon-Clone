@@ -110,7 +110,8 @@ export function renderPaymentSummary() {
     }
     
 
-
+    cart.length = 0;
+    localStorage.removeItem('cart');
     window.location.href = 'orders.html';
   });
 }
