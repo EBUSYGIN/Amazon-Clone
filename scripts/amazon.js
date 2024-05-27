@@ -28,7 +28,7 @@ function renderProductsGrid() {
 
   if (searchValue) {
     products.forEach((product) => {
-      if (product.name.toLowerCase().includes(searchValue.toLocaleLowerCase())) {
+      if (product.name.toLowerCase().includes(searchValue.toLowerCase()) || product.keywords.includes(searchValue.toLowerCase())) {
         productsHTML += `
           <div class="product-container">
             <div class="product-image-container">
