@@ -3,7 +3,8 @@ import {orders} from '../data/orders.js';
 import { formatCurrency } from './utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { getProduct } from '../data/products.js';
-import { addToCart } from '../data/cart.js';
+import { addToCart, calculateCartQuantity } from '../data/cart.js';
+import { search } from './search.js';
 
 
 
@@ -11,6 +12,8 @@ import { addToCart } from '../data/cart.js';
 
 async function renderOrdersPage() {
   await loadProductsFetch();
+
+  search();
 
 
 
@@ -32,7 +35,6 @@ async function renderOrdersPage() {
   } else {
 
     orders.forEach((order) => {
-      console.log(order);
 
       const date = dayjs(order.orderTime).format('dddd, MMMM D, YYYY');
 
@@ -109,6 +111,8 @@ async function renderOrdersPage() {
 
   document.querySelector('.js-orders-grid').innerHTML = ordersHTML;
 
+  document.querySelector('.js-cart-quantity').innerHTML = calculateCartQuantity();
+
 
 
 
@@ -119,11 +123,15 @@ async function renderOrdersPage() {
     button.addEventListener('click', () => {
       const {productId} = button.dataset;
       const {productQuantity} = button.dataset;
-      let timeoutId;
+
       
 
-      addToCart(productId, Number(productQuantity));
 
+      let timeoutId;
+    
+      addToCart(productId, Number(productQuantity));
+      document.querySelector('.js-cart-quantity').innerHTML = calculateCartQuantity();
+      console.log(calculateCartQuantity());
       button.innerHTML = 'Added';
 
 

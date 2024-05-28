@@ -1,17 +1,11 @@
 import {cart, addToCart, calculateCartQuantity} from '../data/cart.js';
 import {products, loadProducts} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
+import { search } from './search.js';
 
 loadProducts(renderProductsGrid);
 
 
-function search() {
-  document.querySelector('.js-search-button').addEventListener('click', () => {
-    const searchValue = document.querySelector('.js-search-bar').value;
-    console.log(searchValue);
-    window.location.href = `index.html?searchValue=${searchValue}`
-  }); 
-}
 
 
 function renderProductsGrid() {

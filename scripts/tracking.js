@@ -3,6 +3,8 @@ import { orders } from "../data/orders.js";
 import { getProduct } from "../data/products.js";
 import { getOrder } from "../data/orders.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
+import { calculateCartQuantity } from "../data/cart.js";
+import { search } from "./search.js";
 
 
 async function renderTrackingPage() {
@@ -10,6 +12,8 @@ async function renderTrackingPage() {
   const orderId = url.searchParams.get('orderId');
   const productId = url.searchParams.get('productId');
   await loadProductsFetch();
+
+  search();
   
 
   const matchingProduct = getProduct(productId);
@@ -82,7 +86,7 @@ async function renderTrackingPage() {
   `;
 
   document.querySelector('.js-main').innerHTML = trackingHTML;
-  
+  document.querySelector('.js-cart-quantity').innerHTML = calculateCartQuantity();
 }
 
 
