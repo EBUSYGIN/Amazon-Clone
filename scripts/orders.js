@@ -7,11 +7,30 @@ import { addToCart, calculateCartQuantity } from '../data/cart.js';
 import { search } from './search.js';
 
 
+async function loadPage() {
+  let flag = false;
+  try {
+    //throw 404 this allows us to throw errors into try-catch 
+    await Promise.all([loadProductsFetch()]);
+    flag = true;
+  } catch(error) {
+    console.log('Error');
+    console.log(error);
+  }
 
+  if (flag === true) {
+    preloader.classList.add('preloader-hide');
+    renderOrdersPage();
+  } else {
+    console.log('Unexpected error');
+  }
+  
+  
+}
+loadPage()
 
 
 async function renderOrdersPage() {
-  await loadProductsFetch();
 
   search();
 
@@ -150,16 +169,6 @@ async function renderOrdersPage() {
   
 }
 
-
-
-
-
-
-
-
-
-
-renderOrdersPage();
 
 
 

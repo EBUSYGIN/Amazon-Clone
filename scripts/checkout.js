@@ -6,18 +6,27 @@ import { loadCart, loadCartFetch } from "../data/cart.js";
 // import '../data/backend-practice.js';
 
 async function loadPage() {
+  let flag = false;
   try {
     //throw 404 this allows us to throw errors into try-catch 
     await Promise.all([loadProductsFetch(),
     loadCartFetch()]);
-
-    renderCheckoutHeader();
-    renderOrderSummary();
-    renderPaymentSummary();
+    flag = true;
   } catch(error) {
     console.log('Error');
     console.log(error);
   }
+
+  if (flag === true) {
+    preloader.classList.add('preloader-hide');
+    renderCheckoutHeader();
+    renderOrderSummary();
+    renderPaymentSummary();
+  } else {
+    console.log('Unexpected error');
+  }
+  
+  
 }
 loadPage()
 

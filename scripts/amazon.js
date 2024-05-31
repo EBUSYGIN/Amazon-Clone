@@ -1,9 +1,27 @@
-import {cart, addToCart, calculateCartQuantity} from '../data/cart.js';
-import {products, loadProducts, renderProductsSearch, renderProducts} from '../data/products.js';
+import {cart, addToCart, calculateCartQuantity, loadCartFetch} from '../data/cart.js';
+import {products, loadProducts, renderProductsSearch, renderProducts, loadProductsFetch} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
 import { search } from './search.js';
 
-loadProducts(renderProductsGrid);
+
+async function loadMainPage() {
+  let flag = false;
+  try {
+    await loadProductsFetch();
+    flag = true
+  } catch(error) {
+    console.log(error);
+  }
+
+  if (flag === true) {
+    preloader.classList.add('preloader-hide');
+    renderProductsGrid();
+  }
+}
+
+loadMainPage();
+
+
 
 
 function renderProductsGrid() {

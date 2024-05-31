@@ -7,6 +7,27 @@ import { calculateCartQuantity } from "../data/cart.js";
 import { search } from "./search.js";
 
 
+async function loadPage() {
+  let flag = false;
+  try {
+    //throw 404 this allows us to throw errors into try-catch 
+    await Promise.all([loadProductsFetch()]);
+    flag = true;
+  } catch(error) {
+    console.log('Error');
+    console.log(error);
+  }
+
+  if (flag === true) {
+    preloader.classList.add('preloader-hide');
+    renderTrackingPage();
+  } else {
+    console.log('Unexpected error');
+  }
+}
+loadPage()
+
+
 async function renderTrackingPage() {
   const url = new URL(window.location.href);
   const orderId = url.searchParams.get('orderId');
