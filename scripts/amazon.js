@@ -1,5 +1,5 @@
-import {cart, addToCart, calculateCartQuantity, loadCartFetch} from '../data/cart.js';
-import {products, loadProducts, renderProductsSearch, renderProducts, loadProductsFetch} from '../data/products.js';
+import {addToCart, calculateCartQuantity} from '../data/cart.js';
+import {products, renderProductsSearch, renderProducts, loadProductsFetch} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
 import { search } from './search.js';
 
@@ -23,13 +23,20 @@ loadMainPage();
 
 
 
-
 function renderProductsGrid() {
   
   search();
 
   const url = new URL(window.location.href);
   const searchValue = url.searchParams.get('searchValue');
+  const pageNum = url.searchParams.get('page') || 0;
+  const limit = 10;
+  const start = pageNum * limit;
+  const end = start + limit;
+
+
+  const paginatedData = products.slice(start, end);
+  
   
   
   
@@ -38,7 +45,7 @@ function renderProductsGrid() {
   if (searchValue) {
     productsHTML = renderProductsSearch(products, searchValue, formatCurrency);
   } else {
-    productsHTML = renderProducts(products, formatCurrency);
+    productsHTML = renderProducts(paginatedData, formatCurrency);
   }
 
   document.querySelector('.js-products-grid').innerHTML = productsHTML;
@@ -113,6 +120,14 @@ function renderProductsGrid() {
     });
   });
   document.querySelector('.js-cart-quantity').innerHTML = calculateCartQuantity();
+
+  document.querySelectorAll('.js-pagination-button').forEach((button) => {
+    button.addEventListener('click', () => {
+      const value = button.innerHTML;
+      window.location.href = `index.html?page=${value - 1}`; 
+    });
+  });
+
 }
 
 
