@@ -1,7 +1,8 @@
 import {addToCart, calculateCartQuantity} from '../data/cart.js';
 import {products, renderProductsSearch, renderProducts, loadProductsFetch} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
-import { search } from './search.js';
+import { search } from './utils/search.js';
+import { renderPagination } from './utils/pagination.js';
 
 
 async function loadMainPage() {
@@ -38,8 +39,6 @@ function renderProductsGrid() {
   const paginatedData = products.slice(start, end);
   
   
-  
-  
   let productsHTML = '';
 
   if (searchValue) {
@@ -49,8 +48,7 @@ function renderProductsGrid() {
   }
 
   document.querySelector('.js-products-grid').innerHTML = productsHTML;
-
-
+  renderPagination(products, limit);
 
   function getTheQuantity(productId) {
     const quantity = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
@@ -128,7 +126,11 @@ function renderProductsGrid() {
     });
   });
 
+
+
+  
 }
+
 
 
 
