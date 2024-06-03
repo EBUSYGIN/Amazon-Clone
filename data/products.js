@@ -148,6 +148,7 @@ export function loadProducts(fun) {
 
 export function renderProductsSearch(products, searchValue, formatCurrency) {
   let productsHTML = '';
+  let count = 0;
   products.forEach((product) => {
     if (product.name.toLowerCase().includes(searchValue.toLowerCase()) || product.keywords.includes(searchValue.toLowerCase())) {
       productsHTML += `
@@ -202,14 +203,16 @@ export function renderProductsSearch(products, searchValue, formatCurrency) {
           </button>
         </div>
         `;
+      count++;
     }
   });
-  return productsHTML;
+   return productsHTML;
 }
 
 
 
 export function renderProducts(products, formatCurrency) {
+  let count = 0;
   let productsHTML = '';
   products.forEach((product) => {
     productsHTML += `
@@ -264,9 +267,10 @@ export function renderProducts(products, formatCurrency) {
         </button>
       </div>
     `;
+    count++;
   });
 
-  return productsHTML;
+  return  productsHTML;
 }
 
 

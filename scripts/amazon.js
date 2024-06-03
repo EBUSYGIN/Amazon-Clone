@@ -2,7 +2,7 @@ import {addToCart, calculateCartQuantity} from '../data/cart.js';
 import {products, renderProductsSearch, renderProducts, loadProductsFetch} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
 import { search } from './utils/search.js';
-import { renderPagination } from './utils/pagination.js';
+import { getPaginationValue, renderPagination } from './utils/pagination.js';
 
 
 async function loadMainPage() {
@@ -34,21 +34,33 @@ function renderProductsGrid() {
   const limit = 10;
   const start = pageNum * limit;
   const end = start + limit;
-
-
-  const paginatedData = products.slice(start, end);
   
+  
+
   
   let productsHTML = '';
+  let count = products.length;
+
+
 
   if (searchValue) {
-    productsHTML = renderProductsSearch(products, searchValue, formatCurrency);
+    const searchArray = products.filter((product) => {
+      if (product.name.toLowerCase().includes(searchValue.toLowerCase()) || product.keywords.includes(searchValue.toLowerCase())) {
+        return true
+      }
+    });
+    const paginatedProducts = searchArray.slice(start, end);
+    count = getPaginationValue(searchValue, products)
+    productsHTML = renderProductsSearch(paginatedProducts, searchValue, formatCurrency);
+    renderPagination(count, limit);
   } else {
-    productsHTML = renderProducts(paginatedData, formatCurrency);
+    const paginatedProducts = products.slice(start, end);
+    productsHTML = renderProducts(paginatedProducts, formatCurrency);
+    renderPagination(count, limit);
   }
 
   document.querySelector('.js-products-grid').innerHTML = productsHTML;
-  renderPagination(products, limit);
+  
 
   function getTheQuantity(productId) {
     const quantity = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
@@ -122,7 +134,12 @@ function renderProductsGrid() {
   document.querySelectorAll('.js-pagination-button').forEach((button) => {
     button.addEventListener('click', () => {
       const value = button.innerHTML;
-      window.location.href = `index.html?page=${value - 1}`; 
+      if (searchValue) {
+        window.location.href = `index.html?searchValue=${searchValue}&page=${value - 1}`;
+      } else {
+        window.location.href = `index.html?page=${value-2}`;
+      }
+      ; 
     });
   });
 
@@ -130,9 +147,3 @@ function renderProductsGrid() {
 
   
 }
-
-
-
-
-
-
