@@ -137,7 +137,7 @@ function renderProductsGrid() {
       if (searchValue) {
         window.location.href = `index.html?searchValue=${searchValue}&page=${value - 1}`;
       } else {
-        window.location.href = `index.html?page=${value-2}`;
+        window.location.href = `index.html?page=${value-1}`;
       }
       ; 
     });
