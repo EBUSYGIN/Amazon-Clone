@@ -4,7 +4,7 @@ import { formatCurrency } from './utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { getProduct } from '../data/products.js';
 import { addToCart, calculateCartQuantity } from '../data/cart.js';
-import { search } from './search.js';
+import { search } from './utils/search.js';
 
 
 async function loadPage() {
@@ -24,8 +24,6 @@ async function loadPage() {
   } else {
     console.log('Unexpected error');
   }
-  
-  
 }
 loadPage()
 

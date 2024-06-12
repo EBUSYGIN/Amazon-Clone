@@ -1,5 +1,5 @@
 import {addToCart, calculateCartQuantity} from '../data/cart.js';
-import {products, renderProductsSearch, renderProducts, loadProductsFetch} from '../data/products.js';
+import {products, renderProducts, loadProductsFetch} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
 import { search } from './utils/search.js';
 import { getPaginationValue, renderPagination } from './utils/pagination.js';
@@ -34,7 +34,7 @@ function renderProductsGrid() {
   const limit = 10;
   const start = pageNum * limit;
   const end = start + limit;
-  
+  document.querySelector('.js-search-bar').value = searchValue;
   
 
   
@@ -51,7 +51,7 @@ function renderProductsGrid() {
     });
     const paginatedProducts = searchArray.slice(start, end);
     count = getPaginationValue(searchValue, products)
-    productsHTML = renderProductsSearch(paginatedProducts, searchValue, formatCurrency);
+    productsHTML = renderProducts(paginatedProducts, formatCurrency);
     renderPagination(count, limit);
   } else {
     const paginatedProducts = products.slice(start, end);
@@ -142,8 +142,4 @@ function renderProductsGrid() {
       ; 
     });
   });
-
-
-
-  
 }
