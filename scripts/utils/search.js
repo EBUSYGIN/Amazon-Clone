@@ -16,3 +16,15 @@ export function search() {
   });
   
 }
+
+
+
+export function getSearchedProducts(products, searchValue) {
+  const searchArray = products.filter((product) => {
+    if (product.name.toLowerCase().includes(searchValue.toLowerCase()) || product.keywords.includes(searchValue.toLowerCase())) {
+      return true
+    }
+  });
+  return searchArray;
+}
+
