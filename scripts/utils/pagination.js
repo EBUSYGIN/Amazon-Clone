@@ -7,13 +7,3 @@ export function renderPagination(count, limit) {
 }
 
 
-
-export function getPaginationValue(searchValue, products) {
-  let count = 0;
-  products.forEach((product) => {
-    if (product.name.toLowerCase().includes(searchValue.toLowerCase()) || product.keywords.includes(searchValue.toLowerCase())) {
-      count++;
-    }
-  });
-  return count;
-}

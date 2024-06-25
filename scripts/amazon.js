@@ -2,8 +2,9 @@ import {addToCart, calculateCartQuantity} from '../data/cart.js';
 import {products, renderProducts, loadProductsFetch} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
 import { search } from './utils/search.js';
-import { getPaginationValue, renderPagination } from './utils/pagination.js';
+import { renderPagination } from './utils/pagination.js';
 import { getFilterParams, filterProducts } from './utils/filtration.js';
+import { getSearchedProducts } from './utils/search.js';
 
 
 
@@ -45,6 +46,7 @@ function renderProductsGrid() {
 
   const url = new URL(window.location.href);
   const searchValue = url.searchParams.get('searchValue');
+  const filtration = url.searchParams.get('filtration');
   const pageNum = url.searchParams.get('page') || 0;
   const limit = 10;
   const start = pageNum * limit;
@@ -58,29 +60,57 @@ function renderProductsGrid() {
 
   // let result = filterProducts(products, filterParams);
   // console.log(result);
-  
 
-  
   let productsHTML = '';
-  let count = products.length;
 
-
-
-  if (searchValue) {
-    const searchArray = products.filter((product) => {
-      if (product.name.toLowerCase().includes(searchValue.toLowerCase()) || product.keywords.includes(searchValue.toLowerCase())) {
-        return true
-      }
-    });
-    const paginatedProducts = searchArray.slice(start, end);
-    count = getPaginationValue(searchValue, products)
+  if (filtration && searchValue) {
+    const filterParams = filtration.split(',');
+    const filteredProducts = filterProducts(products, filterParams);
+    const result = getSearchedProducts(filteredProducts, searchValue);
+    const paginatedProducts = result.slice(start, end);
+    console.log(paginatedProducts);
+    const count = result.length;
+    console.log(count);
+    productsHTML = renderProducts(paginatedProducts, formatCurrency);
+    renderPagination(count, limit);
+  } else if (filtration) {
+    const filterParams = filtration.split(',');
+    const result = filterProducts(products, filterParams);
+    const paginatedProducts = result.slice(start, end);
+    const count = result.length;
+    productsHTML = renderProducts(paginatedProducts, formatCurrency);
+    renderPagination(count, limit);
+  } else if (searchValue) {
+    const result = getSearchedProducts(products, searchValue);
+    const paginatedProducts = result.slice(start, end);
+    const count = result.length;
     productsHTML = renderProducts(paginatedProducts, formatCurrency);
     renderPagination(count, limit);
   } else {
     const paginatedProducts = products.slice(start, end);
     productsHTML = renderProducts(paginatedProducts, formatCurrency);
+    const count = products.length;
     renderPagination(count, limit);
   }
+  
+
+
+
+  // if (searchValue) {
+  //   const searchArray = products.filter((product) => {
+  //     if (product.name.toLowerCase().includes(searchValue.toLowerCase()) || product.keywords.includes(searchValue.toLowerCase())) {
+  //       return true
+  //     }
+  //   });
+  //   const paginatedProducts = searchArray.slice(start, end);
+  //   count = getPaginationValue(searchValue, products)
+  //   productsHTML = renderProducts(paginatedProducts, formatCurrency);
+    
+  // } else {
+  //   const paginatedProducts = products.slice(start, end);
+  //   productsHTML = renderProducts(paginatedProducts, formatCurrency);
+  //   renderPagination(count, limit);
+  // }
 
   document.querySelector('.js-products-grid').innerHTML = productsHTML;
   
@@ -157,12 +187,9 @@ function renderProductsGrid() {
   document.querySelectorAll('.js-pagination-button').forEach((button) => {
     button.addEventListener('click', () => {
       const value = button.innerHTML;
-      if (searchValue) {
-        window.location.href = `index.html?searchValue=${searchValue}&page=${value - 1}`;
-      } else {
-        window.location.href = `index.html?page=${value-1}`;
-      }
-      ; 
+      const url = new URL(window.location.href);
+      url.searchParams.set('page', `${value - 1}`);
+      window.location.href = url;
     });
   });
 
@@ -170,6 +197,10 @@ function renderProductsGrid() {
 
   document.querySelector('.js-filtration-button').addEventListener('click', () => {
     const filterParams = getFilterParams();
+    
 
+    let url = new URL(window.location.href);
+    url.searchParams.set('filtration', `${filterParams}`);
+    window.location.href = url;
   });
 }
