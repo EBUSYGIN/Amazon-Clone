@@ -32,38 +32,60 @@
     </div>
 
 
-
-    <div class="amazon-header">
-      <div class="amazon-header-left-section">
-        <a href="index.html" class="header-link">
-          <img class="amazon-logo"
-            src="images/amazon-logo-white.png">
-          <img class="amazon-mobile-logo"
-            src="images/amazon-mobile-logo-white.png">
-        </a>
+    <header>
+      <div class="header__top">
+        <div class="amazon-header-left-section">
+          <a href="index.html" class="header-link">
+            <img class="amazon-logo"
+              src="images/amazon-logo-white.png">
+            <img class="amazon-mobile-logo"
+              src="images/amazon-mobile-logo-white.png">
+          </a>
+        </div>
+  
+        <div class="amazon-header-middle-section">
+          <input class="search-bar js-search-bar" type="text" placeholder="Search">
+  
+          <button class="search-button js-search-button">
+            <img class="search-icon" src="images/icons/search-icon.png">
+          </button>
+        </div>
+  
+        <div class="amazon-header-right-section">
+          <a class="orders-link header-link" href="orders.html">
+            <span class="returns-text">Returns</span>
+            <span class="orders-text">& Orders</span>
+          </a>
+  
+          <a class="cart-link header-link" href="checkout.html">
+            <img class="cart-icon" src="images/icons/cart-icon.png">
+            <div class="cart-quantity js-cart-quantity"></div>
+            <div class="cart-text">Cart</div>
+          </a>
+        </div>
       </div>
 
-      <div class="amazon-header-middle-section">
-        <input class="search-bar js-search-bar" type="text" placeholder="Search">
-
-        <button class="search-button js-search-button">
-          <img class="search-icon" src="images/icons/search-icon.png">
-        </button>
+      <div class="header__bottom">
+        <nav class="menu">
+          <div class="menu__filtration">
+            <img class="menu__logo" src="./images/menu-logo.svg" alt="Amazon menu">
+            <a href="#">Filtration</a>
+          </div>
+  
+          <div class="menu__section">
+            <a href="#">Amazon Prime</a>
+          </div>
+  
+          <div class="menu__section">
+            <a href="#">Registration</a>
+          </div>
+  
+          <div class="menu__section">
+            <a href="#">Customer service</a>
+          </div>
+        </nav>
       </div>
-
-      <div class="amazon-header-right-section">
-        <a class="orders-link header-link" href="orders.html">
-          <span class="returns-text">Returns</span>
-          <span class="orders-text">& Orders</span>
-        </a>
-
-        <a class="cart-link header-link" href="checkout.html">
-          <img class="cart-icon" src="images/icons/cart-icon.png">
-          <div class="cart-quantity js-cart-quantity"></div>
-          <div class="cart-text">Cart</div>
-        </a>
-      </div>
-    </div>
+    </header>
     
     <div class="main__wrapper">
       <div class="filter__wrapper">
@@ -117,7 +139,7 @@
           </label>
         </div>
 
-        <div class="filtration-button-container">
+        <div class="filter__section">
           <button class="button-primary filtration-button js-filtration-button">Filter</button>
         </div>
       </div>
