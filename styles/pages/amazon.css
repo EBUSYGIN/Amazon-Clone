@@ -38,7 +38,7 @@ a {
   color: #ffffff;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
 }
 
 .menu__filtration {
