@@ -91,6 +91,10 @@ a {
     gap: 4px;
   }
 
+  .menu__logo {
+    width: 16px;
+  }
+
   .filter__wrapper {
     position: fixed;
     top: 99px;
@@ -109,7 +113,7 @@ a {
 
 
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
   .menu__section, .menu__filtration {
     font-size: 10px;
   }
