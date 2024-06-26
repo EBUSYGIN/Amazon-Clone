@@ -201,6 +201,18 @@ function renderProductsGrid() {
 
     let url = new URL(window.location.href);
     url.searchParams.set('filtration', `${filterParams}`);
+    url.searchParams.set('page', `0`);
     window.location.href = url;
+  });
+
+
+
+  document.querySelector('.js-menu__filtration').addEventListener('click', () => {
+    if (document.querySelector('.filter__wrapper').classList.contains('filter__wrapper-is-active')) {
+      document.querySelector('.filter__wrapper').classList.remove('filter__wrapper-is-active');
+    } else {
+      document.querySelector('.filter__wrapper').classList.add('filter__wrapper-is-active');
+    }
+    
   });
 }

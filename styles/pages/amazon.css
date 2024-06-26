@@ -48,6 +48,7 @@ a {
   display: flex;
   justify-content: space-between;
   margin-top: 99px;
+  border-bottom: 1px solid rgb(231, 231, 231);
 }
 
 
@@ -55,7 +56,6 @@ a {
   display: flex;
   flex-direction: column;
   min-width: 230px;
-  border-bottom: 1px solid rgb(231, 231, 231);
 }
 
 .filtration__header {
@@ -71,12 +71,15 @@ a {
   justify-content: center;
   align-items: center;
   
-  padding: 10px;
+  padding: 5px;
 }
+
 
 
 @media (max-width: 680px) {
   .menu__filtration {
+    background: none;
+    border: none;
     font-weight: 500;
     font-size: 14px;
     color: #ffffff;
@@ -86,9 +89,20 @@ a {
   }
 
   .filter__wrapper {
-    display: none;
+    position: fixed;
+    top: 99px;
+    right: 100%;
+    width: 100%;
+    background-color: #ffffff;  
+    transition: right 0.4s;
   }
+
+  .filter__wrapper-is-active {
+    right: 0;
+    border: 1px solid rgb(231, 231, 231);
+  } 
 }
+
 
 
 @media (max-width: 420px) {
@@ -165,7 +179,9 @@ a {
   padding-bottom: 25px;
   padding-left: 25px;
   padding-right: 25px;
-  border: 1px solid rgb(231, 231, 231);
+  border-top: 1px solid rgb(231, 231, 231);
+  border-left: 1px solid rgb(231, 231, 231);
+  border-right: 1px solid rgb(231, 231, 231);
 
   display: flex;
   flex-direction: column;
