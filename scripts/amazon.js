@@ -5,8 +5,7 @@ import { search } from './utils/search.js';
 import { renderPagination } from './utils/pagination.js';
 import { getFilterParams, filterProducts } from './utils/filtration.js';
 import { getSearchedProducts } from './utils/search.js';
-
-
+import { renderFiltrationSection } from './utils/filtration.js';
 
 
 async function loadMainPage() {
@@ -26,19 +25,6 @@ async function loadMainPage() {
 
 loadMainPage();
 
-
-
-// const a = [1, 2, 3, 4, 5, 6, 10, 8, 2, 3, 4, 5];
-
-// const b = [10, 3, 2, 4, 1];
-
-// let result = a.filter( z => b.indexOf(z) !== -1 );
-
-
-// console.log(result);
-
-
-
 function renderProductsGrid() {
   
   search();
@@ -53,7 +39,8 @@ function renderProductsGrid() {
   const end = start + limit;
   document.querySelector('.js-search-bar').value = searchValue;
 
-
+  let filtrationHTML = renderFiltrationSection();
+  console.log(filtrationHTML);
 
   // let filterParams = getFilterParams()
   // console.log(filterParams);
@@ -113,6 +100,7 @@ function renderProductsGrid() {
   // }
 
   document.querySelector('.js-products-grid').innerHTML = productsHTML;
+  document.querySelector('.js-filtration').innerHTML = filtrationHTML;
   
 
   function getTheQuantity(productId) {
