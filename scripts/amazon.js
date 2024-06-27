@@ -40,7 +40,6 @@ function renderProductsGrid() {
   document.querySelector('.js-search-bar').value = searchValue;
 
   let filtrationHTML = renderFiltrationSection();
-  console.log(filtrationHTML);
 
   // let filterParams = getFilterParams()
   // console.log(filterParams);

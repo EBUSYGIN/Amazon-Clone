@@ -14,9 +14,16 @@ export function getFilterParams() {
 
 export function filterProducts(products, filterParams) {
   let result = products.filter((product) => {
-    if (product.priceCents <= Number(filterParams[0]) && product.rating.stars >= Number(filterParams[1])) {
+    const price = Number(filterParams[0]);
+    const stars = Number(filterParams[1]);
+    if (product.priceCents <= price && product.rating.stars >= stars) {
       return true
+    } else if (product.priceCents <= price) {
+      return true;
+    } else if (product.rating.stars >= stars) {
+      return true;
     }
+
   });
   return result;
 }
@@ -29,7 +36,6 @@ export function renderFiltrationSection() {
   let filterParams = [];
   if (params) {
     filterParams = params.split(',');
-    console.log(filterParams);
   }
   
   let isChecked;
