@@ -1,7 +1,10 @@
 export function search() {
   function getUrlParams() {
     const searchValue = document.querySelector('.js-search-bar').value;
-    window.location.href = `index.html?searchValue=${searchValue}`;
+    const url = new URL(window.location.href);
+    url.searchParams.set('searchValue', `${searchValue}`);
+    console.log(url);
+    window.location.href = url;
   }
 
 
