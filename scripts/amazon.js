@@ -194,6 +194,14 @@ function renderProductsGrid() {
   });
 
 
+  document.querySelector('.js-reset-button').addEventListener('click', () => {
+    let url = new URL(window.location.href);
+    url.searchParams.delete('filtration');
+    url.searchParams.set('page', `0`);
+    window.location.href = url;
+  });
+
+
 
   document.querySelector('.js-menu__filtration').addEventListener('click', () => {
     if (document.querySelector('.filter__wrapper').classList.contains('filter__wrapper-is-active')) {
