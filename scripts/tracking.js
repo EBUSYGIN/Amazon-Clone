@@ -4,7 +4,7 @@ import { getProduct } from "../data/products.js";
 import { getOrder } from "../data/orders.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { calculateCartQuantity } from "../data/cart.js";
-import { search } from "./search.js";
+import { search } from "../scripts/utils/search.js";
 
 
 async function loadPage() {
