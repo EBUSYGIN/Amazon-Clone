@@ -41,6 +41,8 @@ function renderProductsGrid() {
 
   let filtrationHTML = renderFiltrationSection();
 
+
+  
   // let filterParams = getFilterParams()
   // console.log(filterParams);
 
@@ -50,7 +52,7 @@ function renderProductsGrid() {
   let productsHTML = '';
 
   if (filtration && searchValue) {
-    const filterParams = filtration.split(',');
+    const filterParams = JSON.parse(filtration);
     const filteredProducts = filterProducts(products, filterParams);
     const result = getSearchedProducts(filteredProducts, searchValue);
     const paginatedProducts = result.slice(start, end);
@@ -60,7 +62,7 @@ function renderProductsGrid() {
     productsHTML = renderProducts(paginatedProducts, formatCurrency);
     renderPagination(count, limit);
   } else if (filtration) {
-    const filterParams = filtration.split(',');
+    const filterParams = JSON.parse(filtration);
     const result = filterProducts(products, filterParams);
     const paginatedProducts = result.slice(start, end);
     const count = result.length;
