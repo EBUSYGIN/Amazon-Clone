@@ -47,12 +47,14 @@ export function renderFiltrationSection() {
   let price = '';
   let stars = '';
 
-  if (filterParams['price']) {
-    price = filterParams.price;
-  }
-
-  if (filterParams['stars']) {
-    stars = filterParams.stars;
+  if (filterParams) {
+    if (filterParams['price']) {
+      price = filterParams.price;
+    }
+  
+    if (filterParams['stars']) {
+      stars = filterParams.stars;
+    }
   }
 
   // if (filterParams) {
