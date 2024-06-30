@@ -23,18 +23,26 @@ export function getFilterParams() {
 
 
 export function filterProducts(products, filterParams) {
-  let result = products.filter((product) => {
-    const price = Number(filterParams.price);
-    const stars = Number(filterParams.stars);
-    if (product.priceCents <= price && product.rating.stars >= stars) {
-      return true
-    } else if (product.priceCents <= price) {
-      return true;
-    } else if (product.rating.stars >= stars) {
-      return true;
-    }
+  const price = Number(filterParams.price);
+  const stars = Number(filterParams.stars);
+  let result;
 
-  });
+  if (price && stars) {
+    result = products.filter((product) => {
+      if (product.priceCents <= price && product.rating.stars >= stars) {
+        return true
+      }
+    });
+  } else {
+    result = products.filter((product) => {
+      if (product.priceCents <= price) {
+        return true;
+      } else if (product.rating.stars >= stars) {
+        return true;
+      }
+    });
+  }
+
   return result;
 }
 
